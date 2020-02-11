@@ -1,0 +1,20 @@
+Material Required:
+1. NodeMCU(ESP8266)
+2. Ultrasonic Sensors
+3. BreadBoard and some jumper wires
+4. A smartphone/wifi router
+
+Now make the connnections as provided in the "circuit_diagram.png" file in the repository.
+After the connections, connect the nodeMCU to the computer and upload the code using arduino ide.
+The code is provided as "code.ino" file in the repository, just change the ssid and the wifi name in the code.
+After this it will automatically gets connected to wifi.
+
+Now you can use any device connected to the wifi to access the information of the garbage bins.
+For this visit http://192.168.255.1 and you will get the info in the form of list which shows dustbins have been filled or not.
+Moreover, we have attached an LED as an indicator to when one needs to check. When any of the bins gets filled up, the LED glows as an indication.
+
+Now one can ensure which of the bins needs to be cleaned. Thus saving time and ensuring proper cleaning.
+
+Limitations:
+In this project, I have used only two sensors, you can use more by just adding few lines of code and connecting multiple sensors.
+If there are a lots of sensors you need to use multiple development boards or microcontrollers and connect them.(Currently working on adding this)
