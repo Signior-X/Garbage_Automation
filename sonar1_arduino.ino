@@ -1,10 +1,12 @@
 //defining pins for sensor
 int trigPin = 13;   
-int echoPin = 12; //use analog
+int echoPin = 12; //For sensor 1
 
-int trigPin2 = 4;   //15 is the output
-int echoPin2 = 5;
+int trigPin2 = 4;   
+int echoPin2 = 5; //For sensor 2
 
+int ledpin=16;  //For ledpin
+int fl=0;  //use as a flag variable
 void setup() {
   // put your setup code here, to run once:
 
@@ -14,15 +16,16 @@ void setup() {
 
     pinMode(trigPin2,OUTPUT);
     pinMode(echoPin2,INPUT);
+
+    pinMode(ledpin,OUTPUT);
     
 }
 
 void loop() {
+
     // put your main code here, to run repeatedly:
-    /*digitalWrite(digi1,HIGH);
-    delay(3000);
-    analogWrite(ana1,200);
-    */
+    fl=0;   //Initially all the bins are empty.
+
     long duration, inches, cm;
    
     digitalWrite(trigPin,LOW);
@@ -35,28 +38,13 @@ void loop() {
     inches = msti(duration);
     cm = mstc(duration);
     
-/*
-    if(cm>5 && cm<10){
-      Serial.print("Blink the LED     ");
-      digitalWrite(digi1,HIGH);
-      digitalWrite(digi2,LOW);
-      delay(100);
-    }
-    else if(cm<5){
-      Serial.print("Blink the LED     ");
-      digitalWrite(digi1,LOW);
-      digitalWrite(digi2,HIGH);
-      delay(100);
-    }
-    else{
-      digitalWrite(digi1,HIGH);
-      digitalWrite(digi2,HIGH);
-      delay(100);
-    }
- */
     Serial.print("Sensor 1: ");
     Serial.print(cm);
     Serial.print(" cm");
+    if(cm<20){
+	serial.print("1st Dustbin needs to be cleaned");
+	fl=1
+    }
     delay(50);
     
     digitalWrite(trigPin2,LOW);
@@ -74,7 +62,20 @@ void loop() {
     Serial.print(" cm");
     Serial.println();
 
+    if(cm<20){
+	serial.print("2nd Dustbin needs to be cleaned");
+	fl=1;
+    }
     delay(50);
+
+    if(fl==1){
+	digitalWrite(ledpin,HIGH);	
+    }
+    else{
+	digitalWrite(ledpin,LOW);
+    }
+
+	delay(5000);  //To wait for 5 seconds until next calculation
 }
 
 long msti(long ms){
